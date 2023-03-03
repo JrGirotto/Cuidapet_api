@@ -23,12 +23,13 @@ class UserRepository implements IUserRepository {
 
     try {
       conn = await connection.openConnection();
+      
       final query = '''
         insert usuario(email, tipo_cadastro, img_avatar, senha, fornecedor_id, social_id)
         values(?,?,?,?,?,?)
       ''';
 
-      final result = await conn.query(query, <Object?> [
+      final result = await conn.query(query, [
         user.email,
         user.registerType,
         user.imageAvatar,
@@ -38,6 +39,7 @@ class UserRepository implements IUserRepository {
       ]);
 
       final userId = result.insertId;
+
       return user.copyWith(id: userId, password: null);
 
     } on MySqlException catch (e, s) {
