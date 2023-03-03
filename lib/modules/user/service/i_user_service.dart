@@ -3,4 +3,5 @@ import 'package:banhopet_api/modules/user/view_modules/user_save_input_model.dar
 
 abstract class IUserService {
   Future<User> createUser(UserSaveInputModel user);
+  Future<User> loginWithEmailPassword(String email, String password, bool supplierUser);
 }
